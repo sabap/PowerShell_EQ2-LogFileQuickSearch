@@ -63,13 +63,13 @@ $SelectedToon = Import-CSV -Path $ToonListFile | Where-Object Selection -eq $Sel
 $SelectedToonName = $SelectedToon.ToonName
 $ToonFilePath = $SelectedToon.LogFilePath
 Clear-Host
-Write-Host "Searching - $ToonName"
+Write-Host "Searching - $SelectedToonName"
 Write-Host ""
 Remove-Item -Path $ServerListFile,$ToonListFile
 
 Function SearchLog {
 Write-Host "Searching for [$Global:SearchCriteria]" -ForegroundColor Yellow
-Get-Content -Path $ToonFilePath -ReadCount 1000 | foreach { $_ -match "$Global:SearchCriteria" }
+Get-Content -Path $ToonFilePath -ReadCount 1000 | ForEach-Object { $_ -match "$Global:SearchCriteria" }
 $Global:SearchAgain = Read-Host -Prompt "Search Again? [Y/N]"
 }
 
